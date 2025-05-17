@@ -10,7 +10,7 @@ const app = express();
 
 // Middlewares
 app.use(cors({
-  origin: 'https://frontend-task-31.vercel.app/',
+  origin: 'https://frontend-task-31.vercel.app',
   credentials: true,
 }));
 app.use(express.json());
