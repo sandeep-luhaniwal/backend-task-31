@@ -18,7 +18,8 @@ app.use(cors({
 app.use(bodyParser.json());
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGO_URI).then(() => console.log('MongoDB Connected'))
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log('MongoDB Connected'))
   .catch(err => console.error('MongoDB Error:', err));
 
 // User Model
@@ -81,6 +82,7 @@ app.get('/protected', verifyToken, (req, res) => {
   res.json({ message: `Welcome ${req.user.username}, this is protected content.` });
 });
 
+// Start Server
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`✅ Server started on port ${PORT}`);
 });
