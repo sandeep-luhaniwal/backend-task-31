@@ -11,7 +11,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 // Middleware
 app.use(cors({
-  origin: 'https://frontend-task-31.vercel.app', // ✅ Your frontend URL
+  origin: 'https://frontend-task-31.vercel.app',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
 }));
@@ -27,10 +27,9 @@ const UserSchema = new mongoose.Schema({
   username: { type: String, unique: true },
   password: String,
 });
-
 const User = mongoose.model('User', UserSchema);
 
-// Register
+// Register Route
 app.post('/register', async (req, res) => {
   const { username, password } = req.body;
   try {
@@ -45,7 +44,7 @@ app.post('/register', async (req, res) => {
   }
 });
 
-// Login
+// Login Route
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
   try {
@@ -60,7 +59,7 @@ app.post('/login', async (req, res) => {
   }
 });
 
-// Verify Token Middleware
+// Token Verification Middleware
 const verifyToken = (req, res, next) => {
   const authHeader = req.headers.authorization;
   if (!authHeader) return res.status(403).json({ message: 'No token provided' });
@@ -78,7 +77,6 @@ app.get('/protected', verifyToken, (req, res) => {
   res.json({ message: `Welcome ${req.user.username}, this is protected content.` });
 });
 
-// Start Server
 app.listen(PORT, () => {
   console.log(`✅ Server started on port ${PORT}`);
 });
