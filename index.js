@@ -10,7 +10,11 @@ const PORT = process.env.PORT || 5000;
 const JWT_SECRET = process.env.JWT_SECRET;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+    origin: 'https://frontend-task-31.vercel.app', // Replace with your frontend URL
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],  
+    credentials: true,
+}));
 app.use(bodyParser.json());
 
 // MongoDB Connection
